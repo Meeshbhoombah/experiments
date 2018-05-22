@@ -3,7 +3,6 @@ import React from 'react';
 import uuid from 'uuid';
 import Notes from './Notes';
 
-
 export default class App extends React.Component {
     
     constructor(props) {
@@ -30,7 +29,7 @@ export default class App extends React.Component {
         return (
             <div>
                 <button onClick={this.addNote}>+</button>
-                <Notes notes={notes} /> 
+                <Notes notes={notes} onDelete={this.deleteNote} /> 
             </div>
         );
     }
@@ -44,5 +43,14 @@ export default class App extends React.Component {
             }])
         });
     }
+
+    deleteNote = (id, e) => {
+        e.stopPropogation();
+
+        this.setState({
+            notes: this.state.notes.filter(note => note.id !== id)
+        });
+    }
+
 }
 
